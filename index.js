@@ -11,7 +11,7 @@ const { RNShakeEvent } = NativeModules;
 
 var listener;
 class RNShake {
-  static config(type: string, handler: Function) {
+  static config(type: int, handler: int) {
     RNShakeEvent.config(type, value);
   }
   static addEventListener(type: string, handler: Function) {
