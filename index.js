@@ -7,8 +7,13 @@
 import React, { DeviceEventEmitter, NativeModules } from 'react-native';
 import invariant from 'invariant';
 
+const { RNShakeEvent } = NativeModules;
+
 var listener;
 class RNShake {
+  static config(type: string, handler: Function) {
+    RNShakeEvent.config(type, value);
+  }
   static addEventListener(type: string, handler: Function) {
     invariant(
       type === 'ShakeEvent',

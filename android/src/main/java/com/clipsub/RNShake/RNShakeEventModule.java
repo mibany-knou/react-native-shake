@@ -34,7 +34,6 @@ public class RNShakeEventModule extends ReactContextBaseJavaModule {
     return "RNShakeEvent";
   }
 
-  @ReactMethod
   public void config(int type, int value) {
     mShakeDetector.config(type, value);
   }
