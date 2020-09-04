@@ -16,8 +16,12 @@ import com.facebook.infer.annotation.Assertions;
  */
 public class CustomShakeDetector implements SensorEventListener {
 
+  public static int TYPE_MAX_SAMPLES = 1;
+  public static int TYPE_MAGNITUDE_THRESHOLD = 2;
+  public static int TYPE_PERCENT_OVER_THRESHOLD_FOR_SHAKE = 4;
+
   //only record and consider the last MAX_SAMPLES number of data points
-  private static final int MAX_SAMPLES = 40;
+  private static int MAX_SAMPLES = 40;
   //collect sensor data in this interval (nanoseconds)
   private static final long MIN_TIME_BETWEEN_SAMPLES_NS =
       TimeUnit.NANOSECONDS.convert(20, TimeUnit.MILLISECONDS);
@@ -25,9 +29,9 @@ public class CustomShakeDetector implements SensorEventListener {
   private static final long VISIBLE_TIME_RANGE_NS =
       TimeUnit.NANOSECONDS.convert(250, TimeUnit.MILLISECONDS);
   //minimum amount of force on accelerometer sensor to constitute a shake
-  private static final int MAGNITUDE_THRESHOLD = 25;
+  private static int MAGNITUDE_THRESHOLD = 25;
   //this percentage of data points must have at least the force of MAGNITUDE_THRESHOLD
-  private static final int PERCENT_OVER_THRESHOLD_FOR_SHAKE = 60;
+  private static int PERCENT_OVER_THRESHOLD_FOR_SHAKE = 60;
   //number of nanoseconds to listen for and count shakes
   private static final float SHAKING_WINDOW_NS =
       TimeUnit.NANOSECONDS.convert(3, TimeUnit.SECONDS);
@@ -73,6 +77,12 @@ public class CustomShakeDetector implements SensorEventListener {
       mNumShakes = 0;
       mLastShakeTimestamp = 0;
     }
+  }
+
+  public void config(int type, int value) {
+    if(TYPE_MAX_SAMPLES == type) MAX_SAMPLES = value;
+    else if(TYPE_MAGNITUDE_THRESHOLD == type) MAGNITUDE_THRESHOLD = value;
+    else if(TYPE_PERCENT_OVER_THRESHOLD_FOR_SHAKE == type) PERCENT_OVER_THRESHOLD_FOR_SHAKE = value;
   }
 
   /**
