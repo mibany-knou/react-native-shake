@@ -64,11 +64,6 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(config: (int)type (int)value)
-{
-  RCTLogInfo("config");
-}
-
 - (instancetype)init
 {
     if ((self = [super init])) {
